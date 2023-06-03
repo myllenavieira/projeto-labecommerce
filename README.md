@@ -1,5 +1,5 @@
-# `Projeto`
-LabEcommerce
+# `Projeto LabEcommerce`
+
 ![Navigate](./src/img/banco-dados.png)
 # `Descrição`
 [Projeto desenvolvido na semana 18 do curso Labenu]. </br>
