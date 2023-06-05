@@ -7,10 +7,6 @@ CREATE TABLE users (
     created_at TEXT DEFAULT(DATETIME()) NOT NULL
 );
 
-INSERT INTO users (id, name, email, password)
-VALUES ("u001", "Fulano", "fulano@email.com","123456"),
-        ("u002", "Beltrana", "beltrana@email.com","654321"),
-        ("u003", "Ciclana", "ciclana@email.com","123321");
 
 SELECT * FROM users;
 
@@ -26,40 +22,12 @@ CREATE TABLE products (
 INSERT INTO products (id, name, price, description, category, image_url)
 VALUES (
         "p001", 
-        "Gargantinha Estrelas", 
-        80,
-        "Gargantilha semijoia folheada pingentes estrelas", 
-        "Acessórios",
+        "Motorola G42", 
+        1200,
+        "Motorola G42", 
+        "Eletrônicos",
         "https://http2.mlstatic.com/D_NQ_NP_957367-MLB44536019148_012021-O.webp"
-    ), (
-        "p002", 
-        "Corrente", 
-        100, 
-        "Corrente de elos dourada",
-        "Acessórios",
-        "https://www.piuka.com.br/media/catalog/product/cache/67e72deeb45f53794a57e07fb433497d/c/h/choker-piuka-cami-elos-grumet-folheada-a-ouro-18k-2.jpg"
-    ), (
-        "p003", 
-        "Brinco Pérola", 
-        60, 
-        "Brinco folheado a ouro com pérolas",
-        "Acessórios",
-        "https://dryzun.vteximg.com.br/arquivos/ids/160287-1000-1000/091885.jpg?v=637442689816800000"
-    ), (
-        "p004", 
-        "Calça Jeans Feminina", 
-        50,
-        "Calça jeans MOM lavagem média",
-        "Roupas e calçados",
-        "https://tfbsmy.vteximg.com.br/arquivos/ids/195849-830-830/96213051f.jpg?v=638067995583900000"
-    ), (
-        "p005", 
-        "Camiseta Preta Feminina", 
-        120, 
-        "Camiseta Feminina preta em algodão",
-        "Roupas e calçados",
-        "https://cdn.shopify.com/s/files/1/0526/4123/5093/products/4_10a008ca-c649-4620-b54d-cdbd7a923816.png?v=1669404166"
-        );
+    );
 
 -- Get All Users
 SELECT * FROM users;
@@ -68,15 +36,15 @@ SELECT * FROM users;
 SELECT * FROM products;
 
 --Search product by name
-SELECT * FROM  products WHERE name LIKE "%Gargantinha Estrelas%";
+SELECT * FROM  products WHERE name LIKE "%Motorola%";
 
 -- Create User
 INSERT INTO users(id, name, email, password)
-VALUES ("u004", "João", "joao@labenu", "265658");
+VALUES ("u004", "João", "joao@email.com", "123456");
 
 -- Create Product
 INSERT INTO products(id, name, price, description, category, image_url)
-VALUES ("p006", "Jaqueta Jeans", 120, "Jaqueta Feminina Jeans Lavagem Média", "Roupas e calçados", "https://img.lojasrenner.com.br/item/667245559/large/6.jpg");    
+VALUES ("p002", "Motorola Edge", 1100, "Motorola edge", "Eletrônicos", "");    
 
 -- Get Products by IDENTIFIED
 SELECT * FROM products
@@ -92,7 +60,7 @@ WHERE id = "p006";
 
 -- Edit User by id
 UPDATE users
-SET password = "0606068"
+SET password = "456789"
 WHERE id = "u001";
 
 -- Edit Product by id
@@ -124,17 +92,12 @@ CREATE TABLE purchases (
 SELECT * FROM purchases;
 
 INSERT INTO purchases(id, buyer, total_price, paid)
-VALUES ("c001", "u001", 100, 0),
-        ("c002", "u001", 50, 0),
-        ("c003", "u002", 30, 0),
-        ("c004", "u002", 80, 0),
-        ("c005", "u003", 20, 0),
-        ("c006", "u003", 60, 0);
+VALUES ("c001", "u001", 1200, 0);
 
 --Atualizar purchases com pagamento = 1 e data atualizada da entrega
 UPDATE purchases
 SET paid = 1, created_at = DATETIME('now')
-WHERE id = "c003";
+WHERE id = "c001";
 
 --Query de consulta com JOIN das tabelas (users e purchases)
 SELECT 
@@ -145,7 +108,7 @@ purchases.created_at,
 purchases.paid
 FROM purchases
 JOIN users ON purchases.buyer = users.id
-WHERE users.id = "u003";    
+WHERE users.id = "u001";    
 
 -- Tabela de relação
 CREATE TABLE purchases_products (
@@ -158,10 +121,7 @@ CREATE TABLE purchases_products (
 
 SELECT * FROM purchases_products;
 
-INSERT INTO purchases_products (purchase_id, product_id, quantity)
-VALUES ("c001","p001", 2),
-        ("c002","p001", 4),
-        ("c003", "p002", 3);
+
 
 SELECT
 purchases.id,
